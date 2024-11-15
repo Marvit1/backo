@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-1+x9ie7mansn0ge&$brta83@lms23%s#cg9a%i8pp_yyhf&58l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['backo-aa1b430f6434.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['backo-aa1b430f6434.herokuapp.com', 'localhost', '127.0.0.1', 'https://fronto-cc004f97394a.herokuapp.com']
 
 
 # Application definition
@@ -69,7 +69,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOWED_ORIGINS = [
     
-   "http://localhost:3000", 'https://backo-aa1b430f6434.herokuapp.com'
+   "http://localhost:3000", 'https://backo-aa1b430f6434.herokuapp.com', 'https://fronto-cc004f97394a.herokuapp.com'
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -151,8 +151,9 @@ STATICFILES_DIRS = [
 
 
 
-MAEDIA_URL ='/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_URL = '/media/'  # Corrected typo
+MEDIA_ROOT = BASE_DIR / 'media/'  # Path where media files are stored
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
