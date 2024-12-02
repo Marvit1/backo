@@ -167,18 +167,20 @@ INSTALLED_APPS += [
     'cloudinary_storage',
 ]
 
+# Cloudinary storage settings
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dygq2v2xg',
     'API_KEY': '522958423682839',
     'API_SECRET': 'tRF8V5Vw_wRx7F1DkIvsiKQx3n0',
 }
+
+# Set Cloudinary as the default file storage
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
-
-MEDIA_URL = 'https://res.cloudinary.com/<dygq2v2xg>/'
+# Media URL (corrected)
+MEDIA_URL = 'https://res.cloudinary.com/dygq2v2xg/'
   # Corrected typo
-MEDIA_ROOT = BASE_DIR / 'media/'  # Path where media files are stored
+#MEDIA_ROOT = BASE_DIR / 'media/'  # Path where media files are stored
 
 
 # Default primary key field type
