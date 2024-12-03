@@ -172,6 +172,7 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dygq2v2xg',
     'API_KEY': '522958423682839',
     'API_SECRET': 'tRF8V5Vw_wRx7F1DkIvsiKQx3n0',
+    'SECURE': True,
 }
 
 # Set Cloudinary as the default file storage

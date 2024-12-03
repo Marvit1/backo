@@ -32,7 +32,7 @@ class Main(models.Model):
     name = models.CharField(max_length=250, verbose_name='Վերնագիր')
     slug = models.SlugField()
     text = models.TextField(blank=True, null=True)
-    image = CloudinaryField('image', blank=True)  # CloudinaryField instead of ImageField
+    image = CloudinaryField('image', blank=True, secure=True)  # CloudinaryField instead of ImageField
     thumbnail = CloudinaryField('image', blank=True)  # CloudinaryField for thumbnail
     date_added = models.DateTimeField(auto_now_add=True, verbose_name='Նյութի ներբեռման ժամանակ')
     view_count = models.IntegerField(default=0)
@@ -84,7 +84,7 @@ class Video(models.Model):
     slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
     video_file = CloudinaryField('video', resource_type='video')  # CloudinaryField for video
-    thumbnail = CloudinaryField('image', blank=True)  # CloudinaryField for thumbnail
+    thumbnail = CloudinaryField('image', blank=True, secure=True)  # CloudinaryField for thumbnail
     date_added = models.DateTimeField(auto_now_add=True, verbose_name='Ներբեռման ժամանակ')
     view_count = models.IntegerField(default=0)
     published = models.BooleanField(default=True, verbose_name='Գրառում հրապարակված է')
@@ -140,8 +140,8 @@ class VideoY(models.Model):
 
 class Reclam(models.Model):
     category = models.ForeignKey(Category, related_name='reclam', on_delete=models.CASCADE, default=1)
-    image = CloudinaryField('image', blank=True)  # CloudinaryField for image
-    thumbnail = CloudinaryField('image', blank=True)  # CloudinaryField for thumbnail
+    image = CloudinaryField('image', blank=True, secure=True)  # CloudinaryField for image
+    thumbnail = CloudinaryField('image', blank=True, secure=True)  # CloudinaryField for thumbnail
     published = models.BooleanField(default=True, verbose_name='Գրառում հրապարակված է')
     link = models.URLField(blank=True)
     slug = models.SlugField(default=1)
