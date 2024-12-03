@@ -1,1 +1,1 @@
-git push origin main
+web: gunicorn back.wsgi --log-file -
