@@ -178,6 +178,10 @@ CLOUDINARY_STORAGE = {
 # Set Cloudinary as the default file storage
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+CLOUDINARY_URL = "cloudinary://522958423682839:tRF8V5Vw_wRx7F1DkIvsiKQx3n0_dygq2v2xg"
+CLOUDINARY_SECURE = True
+
+
 # Media URL (corrected)
 MEDIA_URL = 'https://res.cloudinary.com/dygq2v2xg/'
   # Corrected typo
