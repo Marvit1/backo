@@ -174,12 +174,6 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'tRF8V5Vw_wRx7F1DkIvsiKQx3n0',
     'SECURE': True,
 }
-# Django security settings
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 31536000  # 1 year
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
 
 # Set Cloudinary as the default file storage
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
