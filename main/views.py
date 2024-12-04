@@ -28,6 +28,8 @@ class CategoryList(APIView):
     
 
 #pordz visewtclass MainPost(viewsets.ReadOnlyModelViewSet):
+class MainPost(viewsets.ReadOnlyModelViewSet):
+
     queryset = Main.objects.filter(published=True)[:150]
     serializer_class = MainSerializer
 
