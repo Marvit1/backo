@@ -18,6 +18,17 @@ class MainSerializer(serializers.ModelSerializer):
             "link_name",
             "link",
         )
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        
+        # Ensure URLs use HTTPS
+        if 'get_image' in data and data['get_image']:
+            data['get_image'] = data['get_image'].replace("http://", "https://")
+        
+        if 'get_thumbnail' in data and data['get_thumbnail']:
+            data['get_thumbnail'] = data['get_thumbnail'].replace("http://", "https://")
+        
+        return data
 
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,6 +45,14 @@ class VideoSerializer(serializers.ModelSerializer):
             'published',
             
         )       
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        
+        # Ensure URLs use HTTPS
+        if 'get_video_url' in data and data['get_video_url']:
+            data['get_video_url'] = data['get_video_url'].replace("http://", "https://")
+        
+        return data
 
 # serializers.py
 
@@ -60,3 +79,13 @@ class ReclamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reclam
         fields = '__all__'
+    
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        
+        # Assuming you have URLs in the model fields (like get_image)
+        # Replace http with https in URLs if any
+        if 'get_image' in data and data['get_image']:
+            data['get_image'] = data['get_image'].replace("http://", "https://")
+        
+        return data
