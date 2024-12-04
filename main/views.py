@@ -27,35 +27,28 @@ class CategoryList(APIView):
         return Response(serializer.data)
     
 
-#pordz visewt
-class MainPost(viewsets.ReadOnlyModelViewSet):#(we use viewsets.ReadOnlyModelViewSet to create a read-only viewset)
+#pordz visewtclass MainPost(viewsets.ReadOnlyModelViewSet):
     queryset = Main.objects.filter(published=True)[:150]
     serializer_class = MainSerializer
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        
+
         # Modify the image URLs to use https
         for obj in queryset:
-            if obj.get_image:
-                obj.get_image = obj.get_image.replace("http://", "https://")
-            if obj.get_thumbnail:
-                obj.get_thumbnail = obj.get_thumbnail.replace("http://", "https://")
-        
+            if hasattr(obj, 'get_image') and callable(obj.get_image):
+                image_url = obj.get_image()
+                if isinstance(image_url, str):
+                    obj.get_image = image_url.replace("http://", "https://")
+
+            if hasattr(obj, 'get_thumbnail') and callable(obj.get_thumbnail):
+                thumbnail_url = obj.get_thumbnail()
+                if isinstance(thumbnail_url, str):
+                    obj.get_thumbnail = thumbnail_url.replace("http://", "https://")
+
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        
-        # Modify the image URLs to use https
-        if instance.get_image:
-            instance.get_image = instance.get_image.replace("http://", "https://")
-        if instance.get_thumbnail:
-            instance.get_thumbnail = instance.get_thumbnail.replace("http://", "https://")
-        
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
 
 
 #Main POSTS
@@ -114,24 +107,29 @@ class VideoList(viewsets.ReadOnlyModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        
+
         # Replace 'http' with 'https' for video URLs
         for video in queryset:
-            if video.get_image:  # Assuming your Video model has `get_image` field
-                video.get_image = video.get_image.replace("http://", "https://")
+            if hasattr(video, 'get_image') and callable(video.get_image):
+                image_url = video.get_image()
+                if isinstance(image_url, str):  # Check if it's a string
+                    video.get_image = image_url.replace("http://", "https://")
         
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
     
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
-        
+
         # Replace 'http' with 'https' for video URLs
-        if instance.get_image:
-            instance.get_image = instance.get_image.replace("http://", "https://")
+        if hasattr(instance, 'get_image') and callable(instance.get_image):
+            image_url = instance.get_image()
+            if isinstance(image_url, str):  # Check if it's a string
+                instance.get_image = image_url.replace("http://", "https://")
         
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
     
     
 class VideoDetail(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
